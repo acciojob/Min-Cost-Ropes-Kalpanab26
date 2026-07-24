@@ -1,16 +1,21 @@
-function mincost(arr)
-{
-let sortedArr = arr.sort((a, b) => a - b);
+function mincost(arr) {
+    let cost = 0;
 
-let runningSum = sortedArr[0] + sortedArr[1]; // 3
-let finalSum = runningSum; // store 3
+    while (arr.length > 1) {
+        arr.sort((a, b) => a - b);
 
-for (let i = 2; i < sortedArr.length; i++) {
-    runningSum += sortedArr[i];
-    finalSum += runningSum;
+        let first = arr.shift();
+        let second = arr.shift();
+
+        let sum = first + second;
+
+        cost += sum;
+
+        arr.push(sum);
+    }
+
+    return cost;
 }
 
-console.log(finalSum);
-}
-
-module.exports=mincost;
+console.log(mincost([4, 3, 2, 6])); // 29
+console.log(mincost([1, 2, 3, 4, 5])); // 33
